@@ -9,4 +9,9 @@ module.exports = {
         return db("recipes");
     },
 
+    async add(recipe) {
+        const [id] = await db("recipes").insert(recipe);
+        return this.get(id);
+    },
+
 };

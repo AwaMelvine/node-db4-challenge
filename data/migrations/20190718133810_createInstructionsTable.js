@@ -2,7 +2,7 @@
 exports.up = function (knex) {
     return knex.schema.createTable('instructions', table => {
         table.increments();
-        table.integer('step_number').unique().notNullable();
+        table.integer('step_number').notNullable();
         table.text('text').notNullable();
         table.integer('recipe_id')
             .unsigned()
@@ -11,6 +11,7 @@ exports.up = function (knex) {
             .inTable('recipes')
             .onUpdate('CASCADE')
             .onDelete('CASCADE');
+        table.unique(['recipe_id', 'step_number']);
     });
 };
 
